@@ -11,5 +11,15 @@ pipeline {
         echo 'mvn deploy -P standalone'
       }
     }
+    stage('Deploy Standalone111') {
+      steps {
+        echo 'mvn deploy -P standalone'
+      }
+    }
+     stage('Deploy Standalone1112222') {
+      steps {
+        echo 'mvn deploy -P standalone'
+      }
+    }
   }
 }
