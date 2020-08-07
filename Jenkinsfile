@@ -1,24 +1,44 @@
 pipeline {
   agent any
   stages {
-    stage('Unit Test') {
+    stage('One') {
       steps {
-        echo 'mvn clean test'
+        echo 'Hi, this is Zulaikha from edureka'
       }
     }
-    stage('Deploy Standalone') {
+    stage('Two') {
       steps {
-        echo 'mvn deploy -P standalone'
+        input('Do you want to proceed?')
       }
     }
-    stage('Deploy Standalone111') {
+    stage('Three') {
+      when {
+        not {
+          branch "master"
+        }
+      }
       steps {
-        echo 'mvn deploy -P standalone'
+        echo "Hello"
       }
     }
-     stage('Deploy Standalone1112222') {
-      steps {
-        echo 'mvn deploy -P standalone'
+    stage('Four') {
+      parallel {
+        stage('Unit Test') {
+          steps {
+            echo "Running the unit test..."
+          }
+        }
+        stage('Integration test') {
+          agent {
+            docker {
+              reuseNode true
+              image 'ubuntu'
+            }
+          }
+          steps {
+            echo "Running the integration test..."
+          }
+        }
       }
     }
   }
